@@ -1,7 +1,7 @@
 # 一、NSTimer
 
 
-```
+```objc
 - (instancetype)initWithFireDate:(NSDate *)date 
                         interval:(NSTimeInterval)ti 
                           target:(id)t 
@@ -10,13 +10,13 @@
                          repeats:(BOOL)rep
 ```
 
-```
+```objc
 + (NSTimer *)timerWithTimeInterval:(NSTimeInterval)ti 
                         invocation:(NSInvocation *)invocation 
                            repeats:(BOOL)yesOrNo;
 ```
 
-```
+```objc
 + (NSTimer *)timerWithTimeInterval:(NSTimeInterval)ti 
                             target:(id)aTarget 
                           selector:(SEL)aSelector 
@@ -31,13 +31,13 @@
 >以上的方法用来创建定时器，但是创建完必须自己把其添加到RunLoop
 
 
-```
+```objc
 + (NSTimer *)scheduledTimerWithTimeInterval:(NSTimeInterval)ti 
                                  invocation:(NSInvocation *)invocation 
                                     repeats:(BOOL)yesOrNo;
 ```
 
-```
+```objc
 + (NSTimer *)scheduledTimerWithTimeInterval:(NSTimeInterval)ti 
                                      target:(id)aTarget 
                                    selector:(SEL)aSelector 
@@ -48,7 +48,7 @@
 
 例如：
 
-```
+```objc
     //初始化一个Invocation对象
     NSInvocation * invo = [NSInvocation invocationWithMethodSignature:[[self class] instanceMethodSignatureForSelector:@selector(init)]];
     [invo setTarget:self];
@@ -60,7 +60,7 @@
     [timer fire];
 ```
 
-```
+```objc
 //创建定时器
 NSTimer *timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(timerAction) userInfo:nil repeats:YES];
 //添加到主循环
@@ -68,7 +68,7 @@ NSTimer *timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector
 ```
 释放定时器：
 
-```
+```objc
 [timer invalidate];
 timer = nil;
 ```
@@ -77,13 +77,13 @@ timer = nil;
 >在OS X v10.9以后为了尽量避免在NSTimer触发时间到了而去中断当前处理的任务，NSTimer新增了tolerance属性，让用户可以设置可以容忍的触发的时间范围。
 # 二、CADisplayLink
 
-```
+```objc
 //创建CADisplayLink
 CADisplayLink *displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(MyAction)];
 //添加到主循环
 [displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
 ```
-```
+```objc
 //结束一个CADisplayLink
 [displayLink invalidate];
 ```
@@ -101,11 +101,11 @@ CADisplayLink *displayLink = [CADisplayLink displayLinkWithTarget:self selector:
 
 # 三、dispatch_source
 
-```
+```objc
 @property (nonatomic, strong) dispatch_source_t timer;
 ```
 
-```
+```objc
 __block NSInteger count = 0;
  //创建队列
 dispatch_queue_t queue = dispatch_get_main_queue();
